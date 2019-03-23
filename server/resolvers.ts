@@ -1,6 +1,6 @@
 exports.resolvers = {
     Query: {
-        getAllRecipes: () => {},
+        getAllRecipes: async (root, args, { Recipe }) => await Recipe.find(),
     },
 
     Mutation: {
@@ -8,14 +8,13 @@ exports.resolvers = {
             root,
             { name, description, category, instructions, username },
             { Recipe }
-        ) => {
-            return await new Recipe({
+        ) =>
+            await new Recipe({
                 name,
                 description,
                 category,
                 instructions,
                 username,
-            }).save()
-        },
+            }).save(),
     },
 }

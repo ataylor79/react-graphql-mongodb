@@ -2,6 +2,7 @@ import * as express from 'express'
 import * as bodyParser from 'body-parser'
 import * as mongoose from 'mongoose'
 import * as dotenv from 'dotenv'
+import * as cors from 'cors'
 
 // mongoDB Schemas
 import * as Recipe from './models/Recipe'
@@ -30,6 +31,12 @@ mongoose
 // Start app
 const app = express()
 const port = process.env.PORT || 4444
+
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true,
+}
+app.use(cors(corsOptions))
 
 // Create graphiql app
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
